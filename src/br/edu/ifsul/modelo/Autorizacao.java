@@ -34,7 +34,6 @@ public class Autorizacao implements Serializable {
 
     }
     
-
     public String getApelido() {
         return apelido;
     }

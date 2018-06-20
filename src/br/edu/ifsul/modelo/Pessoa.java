@@ -74,7 +74,7 @@ public class Pessoa implements Serializable{
                 @UniqueConstraint(
                         name = "UK_autorizacoes",
                         columnNames = {"pessoa", "autorizacao"})})
-    List<Autorizacao> autorizacoes = new ArrayList<>();
+    private List<Autorizacao> autorizacoes = new ArrayList<>();
 
     public Pessoa(){
         
@@ -130,7 +130,7 @@ public class Pessoa implements Serializable{
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 29 * hash + Objects.hashCode(this.codigo);
+        hash = 29 * hash + Objects.hashCode(this.getCodigo());
         return hash;
     }
 
@@ -150,6 +150,14 @@ public class Pessoa implements Serializable{
             return false;
         }
         return true;
+    }
+
+    public List<Autorizacao> getAutorizacoes() {
+        return autorizacoes;
+    }
+
+    public void setAutorizacoes(List<Autorizacao> autorizacoes) {
+        this.autorizacoes = autorizacoes;
     }
 
     
