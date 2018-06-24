@@ -40,7 +40,7 @@ public class Pessoa implements Serializable{
             allocationSize = 1)
     @GeneratedValue(generator = "seq_pessoa", strategy = GenerationType.SEQUENCE)
     private Integer codigo;
-     @NotNull(message = "O nome não pode ser nulo")
+    @NotNull(message = "O nome não pode ser nulo")
     @NotBlank(message = "O nome não pode ser em branco")
     @Length(max = 50, message = "O nome não pode ter mais que {max} caracteres")
     @Column(name = "pes_nome", length = 50, nullable = false) 
@@ -61,7 +61,7 @@ public class Pessoa implements Serializable{
     private String nickname;
     @NotNull(message = "A chave de acesso não pode ser nulo")
     @NotBlank(message = "A chave de acesso não pode ser em branco")
-    @Length(max = 20, message = "A chave de acesso não pode ter mais qqweque {max} caracteres")    
+    @Length(max = 20, message = "A chave de acesso não pode ter mais que {max} caracteres")    
     @Column(name = "chave_acesso", length = 20, nullable = false)
     private String chaveAcesso;
     @ManyToMany
