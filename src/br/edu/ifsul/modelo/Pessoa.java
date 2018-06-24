@@ -61,7 +61,7 @@ public class Pessoa implements Serializable{
     private String nickname;
     @NotNull(message = "A chave de acesso não pode ser nulo")
     @NotBlank(message = "A chave de acesso não pode ser em branco")
-    @Length(max = 20, message = "A chave de acesso não pode ter mais que {max} caracteres")    
+    @Length(max = 20, message = "A chave de acesso não pode ter mais qqweque {max} caracteres")    
     @Column(name = "chave_acesso", length = 20, nullable = false)
     private String chaveAcesso;
     @ManyToMany
