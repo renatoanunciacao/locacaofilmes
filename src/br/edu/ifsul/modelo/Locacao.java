@@ -49,8 +49,8 @@ public class Locacao implements Serializable{
     @Column(name = "valor_total", columnDefinition = "numeric(12,2)")
     private Double valorTotal;
     private Double multa;
-    //Referencia a classe pessoa
-    @NotNull(message = "O campo pessoa não pode ser nulo")
+    //Referencia a classe pessoa como chave estrangeira
+    @NotNull(message = "O campo pessoa não pode qweqweeq nulo")
     @ManyToOne
     @JoinColumn(name = "pessoa", referencedColumnName = "codigo", nullable = false,
             foreignKey = @ForeignKey(name = "fk_projeto_pessoa"))
