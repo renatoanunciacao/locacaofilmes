@@ -48,12 +48,12 @@ public class TestePersistirPessoa {
         try{
             em.getTransaction().begin();
             Pessoa p = new Pessoa();
-            p.setNome("Renato Wagner");
-            p.setEndereco("Padre Valentim");
-            p.setData_nascimento(new GregorianCalendar(1991, Calendar.JULY, 02));
-            p.setNickname("renatoanunciacao");
-            p.setChaveAcesso("teste123");
-            Autorizacao a = em.find(Autorizacao.class, "BIGBOSS");
+            p.setNome("Aluno");
+            p.setEndereco("Rua Teste");
+            p.setData_nascimento(new GregorianCalendar(1995, Calendar.MAY, 20));
+            p.setNickname("aluno1");
+            p.setChaveAcesso("aluno1");
+            Autorizacao a = em.find(Autorizacao.class, "CLIENTE");
            
             p.getAutorizacoes().add(a);
             

@@ -44,7 +44,7 @@ public class TestePersistirLocação {
     }
     
     @Test
-    public void persistirFilme(){
+    public void persistirLocacao(){
         boolean exception = false;
         try{
             Locacao l = new Locacao();

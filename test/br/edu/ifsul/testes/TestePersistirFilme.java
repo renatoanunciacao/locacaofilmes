@@ -50,9 +50,9 @@ public class TestePersistirFilme {
             f.setDescricao("Em um mundo apocalíptico, Max Rockatansky acredita que a melhor forma de sobreviver é não depender de ninguém. Porém, após ser capturado pelo tirano Immortan Joe e seus rebeldes, Max se vê no meio de uma guerra mortal, iniciada pela imperatriz Furiosa que tenta salvar um grupo de garotas. Também tentando fugir, Max aceita ajudar Furiosa. Dessa vez, o tirano Joe está ainda mais implacável pois teve algo insubstituível roubado.");
             f.setValor(9.90);
             f.setLocado(false);
-            l.adicionarFilme(f);
+            f.setLocacao(l);
             em.getTransaction().begin();
-            em.persist(l);
+            em.persist(f);
             em.getTransaction().commit();
         } catch (Exception e) {
             exception = true;

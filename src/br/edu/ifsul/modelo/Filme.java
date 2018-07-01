@@ -50,7 +50,7 @@ public class Filme implements Serializable{
     private Boolean locado = false;
     //Faz relação do projeto
     @ManyToOne
-    @JoinColumn(name="locacao", referencedColumnName = "codigo", nullable = false,
+    @JoinColumn(name="locacao", referencedColumnName = "codigo", nullable = true,
             foreignKey = @ForeignKey(name = "fk_locacao_id"))        
     private Locacao locacao;
 
