@@ -52,6 +52,7 @@ public class TestePersistirLocação {
             l.setEmprestimo(new GregorianCalendar(2017, Calendar.FEBRUARY, 05));
             l.setDevolucao(new GregorianCalendar(2017, Calendar.MARCH, 05));
             l.setPessoa(p);
+            l.setValorTotal(0.0);
             em.getTransaction().begin();
             em.persist(l);
             em.getTransaction().commit();

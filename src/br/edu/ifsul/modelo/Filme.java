@@ -47,12 +47,6 @@ public class Filme implements Serializable{
     @Min(value = 1)
     @Column(name = "valor", columnDefinition = "numeric(12,2)" )
     private Double valor;
-    private Boolean locado = false;
-    //Faz relação do projeto
-    @ManyToOne
-    @JoinColumn(name="locacao", referencedColumnName = "codigo", nullable = true,
-            foreignKey = @ForeignKey(name = "fk_locacao_id"))        
-    private Locacao locacao;
 
     public Filme() {
     }
@@ -87,22 +81,6 @@ public class Filme implements Serializable{
 
     public void setValor(Double valor) {
         this.valor = valor;
-    }
-    
-    public Locacao getLocacao() {
-        return locacao;
-    }
-
-    public void setLocacao(Locacao locacao) {
-        this.locacao = locacao;
-    }
-    
-    public Boolean getLocado() {
-        return locado;
-    }
-
-    public void setLocado(Boolean locado) {
-        this.locado = locado;
     }
 
     @Override

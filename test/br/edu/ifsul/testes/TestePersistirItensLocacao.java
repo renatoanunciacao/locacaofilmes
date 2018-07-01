@@ -5,29 +5,28 @@
  */
 package br.edu.ifsul.testes;
 
-import br.edu.ifsul.modelo.Autorizacao;
-import br.edu.ifsul.modelo.Pessoa;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
+import br.edu.ifsul.modelo.Filme;
+import br.edu.ifsul.modelo.ItensLocacao;
+import br.edu.ifsul.modelo.Locacao;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import junit.framework.Assert;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
  *
- * @author Renato
+ * @author alexv
  */
-public class TestePersistirPessoa {
+public class TestePersistirItensLocacao {
     
     EntityManagerFactory emf;
     EntityManager em;
     
-    public TestePersistirPessoa() {
+    public TestePersistirItensLocacao() {
     }
     
     @Before
@@ -43,27 +42,23 @@ public class TestePersistirPessoa {
     }
     
     @Test
-    public void persistirPessoa(){
+    public void persistirFilme(){
         boolean exception = false;
         try{
+            ItensLocacao i = new ItensLocacao();                 
+            Filme f1 = em.find(Filme.class, 1);
+            Locacao l1 = em.find(Locacao.class, 1);
+            i.setFilme(f1);
+            i.setLocacao(l1);
+            l1.adicionarFilme(i);
             em.getTransaction().begin();
-            Pessoa p = new Pessoa();
-            p.setNome("Alex");
-            p.setEndereco("Rua Portugal");
-            p.setData_nascimento(new GregorianCalendar(1991, Calendar.JANUARY, 03));
-            p.setNickname("aluno");
-            p.setChaveAcesso("aluno");
-            Autorizacao a = em.find(Autorizacao.class, "BIGBOSS");
-           
-            p.getAutorizacoes().add(a);
-            
-            em.persist(p);
+            em.persist(l1);
             em.getTransaction().commit();
-            
-        }catch(Exception e){
-             e.printStackTrace();
+        } catch (Exception e) {
             exception = true;
+            e.printStackTrace();
         }
+        //verifico se não ocorreu exceção para passar no teste
         Assert.assertEquals(false, exception);
     }
     

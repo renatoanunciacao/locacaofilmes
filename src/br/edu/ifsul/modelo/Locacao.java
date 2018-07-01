@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -48,33 +49,27 @@ public class Locacao implements Serializable{
     @NotNull(message = "O valor não pode ser nulo")
     @Column(name = "valor_total", columnDefinition = "numeric(12,2)")
     private Double valorTotal;
-    private Double multa;
     //Referencia a classe pessoa como chave estrangeira
     @NotNull(message = "O campo pessoa não pode ser nulo")
     @ManyToOne
     @JoinColumn(name = "pessoa", referencedColumnName = "codigo", nullable = false,
             foreignKey = @ForeignKey(name = "fk_projeto_pessoa"))
     private Pessoa pessoa;
-    //Lista de filmes
+    //Lista de Itens Locação
     @OneToMany(mappedBy = "locacao", cascade = CascadeType.ALL,
             orphanRemoval = true, fetch = FetchType.LAZY) //qual atributo aponta para essa classe
-    private List<Filme> filme = new ArrayList<>();
+    private List<ItensLocacao> itensLocacao = new ArrayList<>();
 
-    public Locacao() {
-        this.valorTotal = 0.0;
-        this.multa = 0.0;
-    }
-    
-    public void adicionarFilme(Filme obj) {
+    public void adicionarFilme(ItensLocacao obj) {
         obj.setLocacao(this);
-        this.valorTotal += obj.getValor(); //atualiza o valor dos itens adicionados no valor total
-        this.filme.add(obj); //adiciona o filme na lista
+        this.valorTotal += obj.getFilme().getValor();
+        this.getItensLocacao().add(obj); //adiciona o filme na lista
     }
 
     public void removerFilme(int index) {
-        Filme obj = this.filme.get(index); //instacia o objeto do item para pegar o indice
-        this.valorTotal -= obj.getValor(); //atualiza o valor dos itens removidos no valor total
-        this.filme.remove(index); //remove o filme da lista
+        ItensLocacao obj = this.getItensLocacao().get(index); //instacia o objeto do item para pegar o indice
+        this.setValorTotal(this.getValorTotal() - obj.getFilme().getValor()); //atualiza o valor dos itens removidos no valor total
+        this.getItensLocacao().remove(index); //remove o filme da lista
     }
 
     public Integer getCodigo() {
@@ -108,15 +103,7 @@ public class Locacao implements Serializable{
     public void setPessoa(Pessoa pessoa) {
         this.pessoa = pessoa;
     }
-
-    public List<Filme> getFilme() {
-        return filme;
-    }
-
-    public void setFilme(List<Filme> filme) {
-        this.filme = filme;
-    }
-
+    
     public Double getValorTotal() {
         return valorTotal;
     }
@@ -125,12 +112,40 @@ public class Locacao implements Serializable{
         this.valorTotal = valorTotal;
     }
 
-    public Double getMulta() {
-        return multa;
+    public List<ItensLocacao> getItensLocacao() {
+        return itensLocacao;
     }
 
-    public void setMulta(Double multa) {
-        this.multa = multa;
+    public void setItensLocacao(List<ItensLocacao> itensLocacao) {
+        this.itensLocacao = itensLocacao;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 89 * hash + Objects.hashCode(this.codigo);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Locacao other = (Locacao) obj;
+        if (!Objects.equals(this.codigo, other.codigo)) {
+            return false;
+        }
+        return true;
+    }
+    
+    
+    
     
 }
